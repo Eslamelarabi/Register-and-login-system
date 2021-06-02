@@ -1,0 +1,11 @@
+Good morning,
+I hope you are having a nice day this is just simple file to explain the development proces and explain some:
+
+1- I used PHPmailer in order to send emails from localhost and i used my personal email in code and in case of testing you need to enter like an email to send from
+2- At first i was separating the files for ( register , login , verify otp ) logics and validations but at the end i decided to make all these functionality in one file
+	to serve the business logic but i'll commit all the files just in case if needed to check.
+3- Added some more validations like if the user try to login before verify his email it'll show him msg that he should verify first then auto redirect to verify page.
+4- and also if he tries to access the dashboard before logging in it will redirect him to login page first.
+
+
+Thank you for reading all this and sorry if I added some stuff that wasn't required but I felt I needed too hope to hear from you soon! :)
