@@ -68,8 +68,7 @@
 
     if (isset($_POST['login'])) {
 
-       // $_SESSION['login_attempts']=1;
-       // $_SESSION['blocked_times'];
+
         $email_login  = $con->real_escape_string($_POST['email']);     
         $password_login  = $con->real_escape_string($_POST['password']);
       
@@ -78,9 +77,8 @@
         $sqll = $con->query("SELECT id, password, name, verified, blocked FROM users WHERE email='$email_login'");
         if ($sqll->num_rows <= 0) {
             $errors_login['email_login'] = "Email doesn't exists in the database!";
-            //if(isset($_SESSION['login_attempts'])){
-                $_SESSION['login_attempts'] += 1;
-            //}   
+            $_SESSION['login_attempts'] += 1;
+             
         }else{
             
             $data = $sqll->fetch_array();
@@ -105,7 +103,6 @@
             }else{
                 $errors_login['password_login'] = "The Entered password doesn't match the email!";
                 $_SESSION['login_attempts_pass'] =  $_SESSION['login_attempts_pass'] + 1;
-                //locked_time_pass
                 
             }
         }
@@ -126,7 +123,7 @@
     // THIS IS FOR VERIFY OTP FUNCTION
 
     if (isset($_POST['otp'])) {
-       // $con = new mysqli('localhost', 'root', '', 'loginSYS'); 	
+ 	
         $postOtp = $_POST['otp'];
         $email  = $_SESSION['EMAIL'];
         $query  = "SELECT * FROM users WHERE otp = '$postOtp' AND email = '$email'";
@@ -149,7 +146,7 @@
     // RESEND OTP Logic
 
     if (isset($_GET['resend']) && $_GET['resend'] == 1) {
-       // $email  = $_SESSION['EMAIL'];
+
        if (isset($_SESSION['resend_attempts'])){
         $_SESSION['resend_attempts']+=1;
        }  
@@ -171,8 +168,8 @@
         $mail->isSMTP();                                      
         $mail->Host = 'smtp.gmail.com';                       
         $mail->SMTPAuth = true;                               
-        $mail->Username = 'eslamelarabi87@gmail.com';        // SMTP username ADD THE EMAIL HERE AS SAID IN README FILE
-        $mail->Password = 'Serialkiller79';                  // SMTP password AND HERE IS THE PASSWORD
+        $mail->Username = 'yourEmail@gmail.com';        // SMTP username ADD THE EMAIL HERE AS SAID IN README FILE
+        $mail->Password = 'yourPassword';                  // SMTP password AND HERE IS THE PASSWORD
         $mail->SMTPSecure = 'tls';                            
         $mail->Port = 587;                                    
         $mail->setFrom('FromEmail', 'OTP Verification');
